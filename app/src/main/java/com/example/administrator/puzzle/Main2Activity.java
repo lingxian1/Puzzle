@@ -48,7 +48,11 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         gv_Pic_List.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(Main2Activity.this, "done", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Main2Activity.this, "done"+type+"---"+resPicId[position], Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Main2Activity.this, PuzzleMain.class);
+                intent.putExtra("picSelectedID", resPicId[position]);
+                intent.putExtra("type", type);
+                startActivity(intent);
             }
         });
         type_selected.setOnClickListener(new View.OnClickListener() {

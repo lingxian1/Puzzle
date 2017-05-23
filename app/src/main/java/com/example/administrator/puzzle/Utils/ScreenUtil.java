@@ -13,7 +13,7 @@ public class ScreenUtil {
      * @param context
      * @return
      */
-    public static DisplayMetrics getScreenSzie(Context context){
+    public static DisplayMetrics getScreenSize(Context context){
         DisplayMetrics metrics=new DisplayMetrics();
         WindowManager wm=(WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
         Display display=wm.getDefaultDisplay();
