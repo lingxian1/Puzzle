@@ -77,9 +77,8 @@ public class PuzzleMain extends AppCompatActivity implements View.OnClickListene
         Bitmap picSelectedTemp;
         // 选择默认图片
         resId = getIntent().getExtras().getInt("picSelectedID");
-        picSelectedTemp = BitmapFactory.decodeResource(getResources(), resId);
-
         type = getIntent().getExtras().getInt("type", 2);
+        picSelectedTemp = BitmapFactory.decodeResource(getResources(), resId);
         handlerImage(picSelectedTemp);
         initViews();
         generateGame();
@@ -102,7 +101,9 @@ public class PuzzleMain extends AppCompatActivity implements View.OnClickListene
                         bitmapItemLists.add(lastBitmap);
                         // 通知GridView更改UI
                         adapter.notifyDataSetChanged();
-                        Toast.makeText(PuzzleMain.this, "拼图成功!", Toast.LENGTH_LONG).show();
+                        //// TODO: 2017/5/23 写入本地数据库
+
+                        Toast.makeText(PuzzleMain.this, "拼图成功!时间:"+timerIndex+"s", Toast.LENGTH_LONG).show();
                         puzzle_main_detail.setEnabled(false);
                         timer.cancel();
                         timerTask.cancel();

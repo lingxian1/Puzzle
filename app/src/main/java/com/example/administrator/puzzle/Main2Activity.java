@@ -13,6 +13,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -26,6 +27,8 @@ import java.util.List;
 
 
 public class Main2Activity extends AppCompatActivity implements View.OnClickListener {
+
+    private static final String TAG = "Main2Activity";
     private PopupWindow popupWindow;
     private View popupView;
     private TextView ps3;
@@ -33,11 +36,12 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
     private TextView ps5;
     private TextView type_selected;
     private LayoutInflater layoutInflater;
-    private static final String TAG = "Main2Activity";
     private GridView gv_Pic_List;
     private List<Bitmap> picList;
+    private Button search_top_info;
     private int type = 3;
     private int[] resPicId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +68,10 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
     }
 
     public void init(){
+        //// TODO: 2017/5/24 初始化数据库 
         gv_Pic_List = (GridView) findViewById(R.id.pic_list);
+        //初始化button
+        search_top_info=(Button)findViewById(R.id.button);
         // 初始化Bitmap数据
         resPicId = new int[] {R.drawable.a1,R.drawable.a2,R.drawable.a3,R.drawable.a4};
         Bitmap[] bitmaps = new Bitmap[resPicId.length];
@@ -77,7 +84,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         // type view
         popupView = layoutInflater.inflate(R.layout.popui, null);
-    //    Log.d(TAG, "init: "+popview_height);
+        //Log.d(TAG, "init: "+popview_height);
         ps3 = (TextView) popupView.findViewById(R.id.p3);
         ps4 = (TextView) popupView.findViewById(R.id.p4);
         ps5 = (TextView) popupView.findViewById(R.id.p5);
@@ -121,5 +128,10 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
                 break;
         }
         popupWindow.dismiss();
+    }
+
+    public void searchTop(View view) {
+        Intent intent = new Intent(Main2Activity.this, TopList.class);
+        startActivity(intent);
     }
 }
