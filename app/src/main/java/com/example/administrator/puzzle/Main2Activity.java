@@ -1,6 +1,8 @@
 package com.example.administrator.puzzle;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -17,10 +19,9 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.administrator.puzzle.Adapt.GridPicListAdapter;
-import com.example.administrator.puzzle.Utils.ScreenUtil;
+import com.example.administrator.puzzle.Utils.SQLiteHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +42,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
     private Button search_top_info;
     private int type = 3;
     private int[] resPicId;
-
+    private SQLiteHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +69,6 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
     }
 
     public void init(){
-        //// TODO: 2017/5/24 初始化数据库 
         gv_Pic_List = (GridView) findViewById(R.id.pic_list);
         //初始化button
         search_top_info=(Button)findViewById(R.id.button);

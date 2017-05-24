@@ -1,11 +1,13 @@
 package com.example.administrator.puzzle;
 
+import android.content.ContentValues;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -22,16 +24,21 @@ import android.widget.Toast;
 
 import com.example.administrator.puzzle.Adapt.GridItemsAdapter;
 import com.example.administrator.puzzle.Bean.ItemBean;
+import com.example.administrator.puzzle.Utils.DateUtils;
 import com.example.administrator.puzzle.Utils.GameUtil;
 import com.example.administrator.puzzle.Utils.ImagesUtil;
+import com.example.administrator.puzzle.Utils.SQLiteHelper;
 import com.example.administrator.puzzle.Utils.ScreenUtil;
 
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class PuzzleMain extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG ="test" ;
     // 选择的图片
     private Bitmap picSelected;
     // 拼图完成时显示的最后一个图片
@@ -50,7 +57,7 @@ public class PuzzleMain extends AppCompatActivity implements View.OnClickListene
     private Button Restart;
     private TextView time;
     private ImageView imageView;
-
+    private SQLiteHelper sql;
     private Handler handler = new Handler() {
 
         @Override
@@ -78,6 +85,7 @@ public class PuzzleMain extends AppCompatActivity implements View.OnClickListene
         // 选择默认图片
         resId = getIntent().getExtras().getInt("picSelectedID");
         type = getIntent().getExtras().getInt("type", 2);
+        sql=new SQLiteHelper(this);
         picSelectedTemp = BitmapFactory.decodeResource(getResources(), resId);
         handlerImage(picSelectedTemp);
         initViews();
@@ -101,8 +109,9 @@ public class PuzzleMain extends AppCompatActivity implements View.OnClickListene
                         bitmapItemLists.add(lastBitmap);
                         // 通知GridView更改UI
                         adapter.notifyDataSetChanged();
-                        //// TODO: 2017/5/23 写入本地数据库
+                        ////写入本地数据库
 
+                        sql.insert(DateUtils.getDate(),""+timerIndex,""+type);
                         Toast.makeText(PuzzleMain.this, "拼图成功!时间:"+timerIndex+"s", Toast.LENGTH_LONG).show();
                         puzzle_main_detail.setEnabled(false);
                         timer.cancel();
