@@ -11,14 +11,12 @@ import java.util.Date;
  */
 
 public class DateUtils {
-    private static final String TAG ="test";
 
     public static String getDate(){
         //获取当前日期
         Date d = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String date = sdf.format(d);
-        Log.d(TAG, "write_db: "+date);
         return date;
     }
 }

@@ -95,6 +95,10 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         ps5.setOnClickListener(this);
     }
 
+    /**
+     * 难度选择菜单
+     * @param view
+     */
     public void ShowPopup(View view){
         //int density=(int)ScreenUtil.getDeviceDensity(this);
         popupWindow = new PopupWindow(popupView, 200,100);
@@ -109,6 +113,10 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         popupWindow.showAtLocation(view, Gravity.NO_GRAVITY, location[0]-20, location[1]);
     }
 
+    /**
+     * 难度选择菜单动作
+     * @param v
+     */
     public void onClick(View v) {
         switch (v.getId()) {
             // Type
@@ -130,6 +138,10 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         popupWindow.dismiss();
     }
 
+    /**
+     * 查看排行榜
+     * @param view
+     */
     public void searchTop(View view) {
         Intent intent = new Intent(Main2Activity.this, TopList.class);
         startActivity(intent);

@@ -1,6 +1,7 @@
 package com.example.administrator.puzzle;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
@@ -30,8 +31,6 @@ import com.example.administrator.puzzle.Utils.ImagesUtil;
 import com.example.administrator.puzzle.Utils.SQLiteHelper;
 import com.example.administrator.puzzle.Utils.ScreenUtil;
 
-import java.util.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -86,6 +85,7 @@ public class PuzzleMain extends AppCompatActivity implements View.OnClickListene
         resId = getIntent().getExtras().getInt("picSelectedID");
         type = getIntent().getExtras().getInt("type", 2);
         sql=new SQLiteHelper(this);
+
         picSelectedTemp = BitmapFactory.decodeResource(getResources(), resId);
         handlerImage(picSelectedTemp);
         initViews();
@@ -111,7 +111,7 @@ public class PuzzleMain extends AppCompatActivity implements View.OnClickListene
                         adapter.notifyDataSetChanged();
                         ////写入本地数据库
 
-                        sql.insert(DateUtils.getDate(),""+timerIndex,""+type);
+                        sql.insert(DateUtils.getDate(),timerIndex,""+type);
                         Toast.makeText(PuzzleMain.this, "拼图成功!时间:"+timerIndex+"s", Toast.LENGTH_LONG).show();
                         puzzle_main_detail.setEnabled(false);
                         timer.cancel();
@@ -265,5 +265,11 @@ public class PuzzleMain extends AppCompatActivity implements View.OnClickListene
             default:
                 break;
         }
+    }
+
+    public void back(View view) {
+        Intent intent=new Intent();
+        setResult(0,intent);
+        finish();
     }
 }

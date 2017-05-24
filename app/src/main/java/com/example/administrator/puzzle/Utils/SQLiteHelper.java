@@ -3,11 +3,9 @@ package com.example.administrator.puzzle.Utils;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.util.Date;
 
 /**
  * Android shnu
@@ -15,7 +13,7 @@ import java.util.Date;
  */
 
 public class SQLiteHelper extends SQLiteOpenHelper {
-    private final static String DATABASE_NAME = "Puzzle";
+    private final static String DATABASE_NAME = "Puzzle2";
     private final static int DATABASE_VERSION = 1;
     private final static String TABLE_NAME = "top";
     //创建数据库
@@ -27,7 +25,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String sql = "CREATE TABLE if not exists " + TABLE_NAME
                 + "(create_date VARCHAR,"
-                + " use_time VARCHAR,"
+                + " use_time int,"
                 + " type VARCHAR)";
         db.execSQL(sql);
     }
@@ -40,7 +38,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     }
 
     //添加数据
-    public long insert(String date, String use_time, String type ) {
+    public long insert(String date, int use_time, String type ) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("create_date",date);
@@ -50,10 +48,15 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         return row;
     }
 
-    //根据条件查询
+    /**
+     * 根据条件查询
+     * @param type
+     * @return
+     */
     public Cursor query(String type) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE type like ? order by use_time", new String[]{type});
+        //Cursor cursor = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE type like ? order by use_time ASC", new String[]{type});
+        Cursor cursor = db.query(TABLE_NAME,null,"type=? ",new String[]{type},null,null,"use_time "+"ASC");
         return cursor;
     }
 }
