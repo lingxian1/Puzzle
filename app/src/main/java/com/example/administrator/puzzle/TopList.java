@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.example.administrator.puzzle.Utils.SQLiteHelper;
 
 public class TopList extends AppCompatActivity {
-    private static final String TAG ="sqltest" ;
+    private static final String TAG ="sqltest";
     private TextView top_list;
     private SQLiteHelper sql;
     private Cursor cursor;
