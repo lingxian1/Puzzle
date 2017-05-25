@@ -5,3 +5,4 @@
 1.2.0 top list done
 1.3.0 icon
 1.4.0 some change
+1.5.0 fix a bug about loading pictures
