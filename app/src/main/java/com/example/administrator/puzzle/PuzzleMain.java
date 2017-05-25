@@ -2,6 +2,7 @@ package com.example.administrator.puzzle;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
@@ -109,10 +110,13 @@ public class PuzzleMain extends AppCompatActivity implements View.OnClickListene
                         bitmapItemLists.add(lastBitmap);
                         // 通知GridView更改UI
                         adapter.notifyDataSetChanged();
-                        ////写入本地数据库
-
+                        if(newRecord(""+type,timerIndex)){
+                            Toast.makeText(PuzzleMain.this, "新记录!时间:"+timerIndex+"s", Toast.LENGTH_LONG).show();
+                        }else{
+                            Toast.makeText(PuzzleMain.this, "拼图成功!时间:"+timerIndex+"s", Toast.LENGTH_LONG).show();
+                        }
+                        //写入本地数据库
                         sql.insert(DateUtils.getDate(),timerIndex,""+type);
-                        Toast.makeText(PuzzleMain.this, "拼图成功!时间:"+timerIndex+"s", Toast.LENGTH_LONG).show();
                         puzzle_main_detail.setEnabled(false);
                         timer.cancel();
                         timerTask.cancel();
@@ -267,6 +271,29 @@ public class PuzzleMain extends AppCompatActivity implements View.OnClickListene
         }
     }
 
+    /**
+     * 新记录
+     * @param type
+     * @param timerIndex
+     * @return
+     */
+    public boolean newRecord(String type,int timerIndex){
+        Cursor cursor=sql.getTop(type);
+        if(cursor==null) return true;
+        for(cursor.moveToFirst();!cursor.isAfterLast();cursor.moveToNext()){
+            int temp=cursor.getInt(1);
+            Log.d(TAG, "newRecord: "+temp);
+            if (timerIndex<temp){
+                Log.d(TAG, "true");
+                return true;
+            }
+        }
+        Log.d(TAG, "false");
+        return false;
+    }
+    /**
+     * 返回
+     */
     public void back(View view) {
         Intent intent=new Intent();
         setResult(0,intent);

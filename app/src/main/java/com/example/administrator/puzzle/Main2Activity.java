@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.example.administrator.puzzle.Adapt.GridPicListAdapter;
 import com.example.administrator.puzzle.Utils.SQLiteHelper;
+import com.example.administrator.puzzle.Utils.ScreenUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,10 +71,13 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
 
     public void init(){
         gv_Pic_List = (GridView) findViewById(R.id.pic_list);
+        //行间距
+        gv_Pic_List.setVerticalSpacing(10);
         //初始化button
         search_top_info=(Button)findViewById(R.id.button);
-        // 初始化Bitmap数据
-        resPicId = new int[] {R.drawable.a1,R.drawable.a2,R.drawable.a3,R.drawable.a4};
+        // 初始化Bitmap数据 默认图片添加
+        resPicId = new int[] {R.drawable.a1,R.drawable.a2,R.drawable.a3,R.drawable.a4,R.drawable.a5,
+                R.drawable.a6,R.drawable.a7,R.drawable.a8,R.drawable.a9,R.drawable.a10};
         Bitmap[] bitmaps = new Bitmap[resPicId.length];
         for (int i = 0; i < bitmaps.length; i++) {
             bitmaps[i] = BitmapFactory.decodeResource(getResources(), resPicId[i]);
@@ -100,8 +104,8 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
      * @param view
      */
     public void ShowPopup(View view){
-        //int density=(int)ScreenUtil.getDeviceDensity(this);
-        popupWindow = new PopupWindow(popupView, 200,100);
+        int density=(int) ScreenUtil.getDeviceDensity(this);
+        popupWindow = new PopupWindow(popupView, 200*density,200*density);
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(true);
         // 透明背景
@@ -110,7 +114,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         // 获取位置
         int[] location = new int[2];
         view.getLocationOnScreen(location);
-        popupWindow.showAtLocation(view, Gravity.NO_GRAVITY, location[0]-20, location[1]);
+        popupWindow.showAtLocation(view, Gravity.NO_GRAVITY, location[0]-20*density, location[1]);
     }
 
     /**

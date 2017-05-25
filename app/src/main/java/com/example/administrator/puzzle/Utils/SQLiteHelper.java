@@ -49,7 +49,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * 根据条件查询
+     * 根据条件查询排名
      * @param type
      * @return
      */
@@ -58,5 +58,25 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         //Cursor cursor = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE type like ? order by use_time ASC", new String[]{type});
         Cursor cursor = db.query(TABLE_NAME,null,"type=? ",new String[]{type},null,null,"use_time "+"ASC");
         return cursor;
+    }
+
+    /**
+     * 获得最小值
+     * @param type
+     * @return
+     */
+    public Cursor getTop(String type) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        //Cursor cursor = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE type like ? order by use_time ASC", new String[]{type});
+        Cursor cursor = db.query(TABLE_NAME,null,"type=? ",new String[]{type},null,null,"use_time "+"ASC","1");
+        return cursor;
+    }
+
+    /**
+     * 清排行数据
+     */
+    public void delete(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        db.delete(TABLE_NAME,null,null);
     }
 }

@@ -46,13 +46,12 @@ public class GridPicListAdapter extends BaseAdapter {
         if (convertView == null) {
             iv_pic_item = new ImageView(context);
             // 设置布局 图片
-            iv_pic_item.setLayoutParams(new GridView.LayoutParams(80, 100));
+            iv_pic_item.setLayoutParams(new GridView.LayoutParams(100, 100));
             // 设置显示比例类型
             iv_pic_item.setScaleType(ImageView.ScaleType.FIT_XY);
         } else {
             iv_pic_item = (ImageView) convertView;
         }
-        //iv_pic_item.setBackgroundColor(color.black);
         iv_pic_item.setImageBitmap(picList.get(position));
         return iv_pic_item;
     }

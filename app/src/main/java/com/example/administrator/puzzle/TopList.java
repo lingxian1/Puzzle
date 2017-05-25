@@ -27,6 +27,7 @@ public class TopList extends AppCompatActivity {
 
         sql = new SQLiteHelper(this);
         init();
+        //默认显示3*3的排行
         showTop10(""+3);
 
     }
@@ -54,7 +55,7 @@ public class TopList extends AppCompatActivity {
             top_list.append(line+"    ");
             top_list.append(cursor.getString(0));
             top_list.append("    "+cursor.getInt(1)+"s"+"\n");
-            Log.d(TAG, "showTop10: "+cursor.getString(0)+"--------------"+cursor.getInt(1));
+            //Log.d(TAG, "showTop10: "+cursor.getString(0)+"--------------"+cursor.getInt(1));
             line++;
             count--;
         }
