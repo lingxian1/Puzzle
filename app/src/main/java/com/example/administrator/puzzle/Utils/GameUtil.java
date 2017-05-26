@@ -11,7 +11,8 @@ import java.util.List;
  * Created by 140153815cyk on 2017/5/23.
  */
 
-public class GameUtil { // 游戏信息单元格Bean
+public class GameUtil {
+    // 游戏信息单元格Bean
     public static List<ItemBean> itemBeans = new ArrayList<ItemBean>();
     // 空格单元格
     public static ItemBean blankItemBean = new ItemBean();
@@ -63,7 +64,9 @@ public class GameUtil { // 游戏信息单元格Bean
     public static void getPuzzleGenerator() {
         int index = 0;
         for (int i = 0; i < itemBeans.size(); i++) {
+            //产生[0,1)*type*type的随机整数
             index = (int) (Math.random() * PuzzleMain.type * PuzzleMain.type);
+            //list中指针0-8 对应ItemID为1-9,ItemID不会被交换
             swapItems(itemBeans.get(index), GameUtil.blankItemBean);
         }
         List<Integer> data = new ArrayList<Integer>();
@@ -85,6 +88,7 @@ public class GameUtil { // 游戏信息单元格Bean
      */
     public static boolean isSuccess() {
         for (ItemBean tempBean : GameUtil.itemBeans) {
+            //ItemID不会被交换，所以只要判断N轮交换过后ItemID是否等于BitmapID即可
             if (tempBean.getBitmapId() != 0 && (tempBean.getItemId()) == tempBean.getBitmapId()) {
                 continue;
             } else if (tempBean.getBitmapId() == 0 && tempBean.getItemId() == PuzzleMain.type * PuzzleMain.type) {

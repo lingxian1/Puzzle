@@ -84,7 +84,7 @@ public class PuzzleMain extends AppCompatActivity implements View.OnClickListene
         Bitmap picSelectedTemp;
         // 选择默认图片
         resId = getIntent().getExtras().getInt("picSelectedID");
-        type = getIntent().getExtras().getInt("type", 2);
+        type = getIntent().getExtras().getInt("type",3);//设置一个默认值
         sql=new SQLiteHelper(this);
 
         picSelectedTemp = BitmapFactory.decodeResource(getResources(), resId);
@@ -102,7 +102,7 @@ public class PuzzleMain extends AppCompatActivity implements View.OnClickListene
                     // 通知GridView更改UI
                     adapter.notifyDataSetChanged();
 
-                    // 判断是否成功
+
                     if (GameUtil.isSuccess()) {
                         // 将最后一张图显示完整
                         recreateData();
@@ -282,13 +282,10 @@ public class PuzzleMain extends AppCompatActivity implements View.OnClickListene
         if(cursor==null) return true;
         for(cursor.moveToFirst();!cursor.isAfterLast();cursor.moveToNext()){
             int temp=cursor.getInt(1);
-            Log.d(TAG, "newRecord: "+temp);
             if (timerIndex<temp){
-                Log.d(TAG, "true");
                 return true;
             }
         }
-        Log.d(TAG, "false");
         return false;
     }
     /**

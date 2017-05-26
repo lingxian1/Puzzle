@@ -37,7 +37,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    //添加数据
+    /**
+     * 添加数据
+     */
     public long insert(String date, int use_time, String type ) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();

@@ -88,7 +88,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         // type view
         popupView = layoutInflater.inflate(R.layout.popui, null);
-        //Log.d(TAG, "init: "+popview_height);
+
         ps3 = (TextView) popupView.findViewById(R.id.p3);
         ps4 = (TextView) popupView.findViewById(R.id.p4);
         ps5 = (TextView) popupView.findViewById(R.id.p5);

@@ -50,6 +50,7 @@ public class ImagesUtil {
         blankBitmap = Bitmap.createBitmap(blankBitmap, 0, 0, itemWidth, itemHeight);
 
         bitmapItems.add(blankBitmap);
+        //设置空块ItemID为type * type，BitmapID为0
         GameUtil.itemBeans.add(new ItemBean(type * type, 0, blankBitmap));
 
         GameUtil.blankItemBean = GameUtil.itemBeans.get(type * type - 1);

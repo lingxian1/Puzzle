@@ -44,8 +44,8 @@ public class TopList extends AppCompatActivity {
      * @param type  类型
      */
     public void showTop10(String type){
-        int line=1;
-        int count=10;
+        int line=1;//行数
+        int count=10;//显示个数
         top_list.append("         date      ");
         top_list.append("        time"+"\n");
         top_list.append("-------------------------------------"+"\n");
