@@ -91,7 +91,7 @@ public class GameUtil {
             //ItemID不会被交换，所以只要判断N轮交换过后ItemID是否等于BitmapID即可
             if (tempBean.getBitmapId() != 0 && (tempBean.getItemId()) == tempBean.getBitmapId()) {
                 continue;
-            } else if (tempBean.getBitmapId() == 0 && tempBean.getItemId() == PuzzleMain.type * PuzzleMain.type) {
+            } else if (tempBean.getBitmapId() == 0 && tempBean.getItemId() == PuzzleMain.type * PuzzleMain.type) {//空白块判定
                 continue;
             } else {
                 return false;
